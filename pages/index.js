@@ -10,10 +10,10 @@ export default function Home() {
       <Head>
         <title>Instashop.com - Your instant shop</title>
         <meta name="description" content="Insashop: Created by Prakalp Pande" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width , initial-scale=1.0 , minimum-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
+
       <div>
         <img src="/home.jpg" alt="Home image" />
       </div>
