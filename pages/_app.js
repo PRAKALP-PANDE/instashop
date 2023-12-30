@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({})
   const [subTotal, setSubTotal] = useState(0)
   useEffect(() => {
-    console.log("Hey, I am a useEffect from _app.js")
+    // console.log("Hey, I am a useEffect from _app.js")
     try {
       if (localStorage.getItem("cart")) {
         setCart(JSON.parse(localStorage.getItem("cart")))
@@ -21,11 +21,11 @@ export default function App({ Component, pageProps }) {
 
 
   const saveCart = (myCart) => {
-    localStorage.setItem("cart", myCart)
+    localStorage.setItem("cart", JSON.stringify(myCart))
     let subt = 0;
-    let keys = Object.keys(cart)
-    for (let i = 0; keys.length; i++) {
-      subt += myCart[keys[i]].price * myCart[keys[i]].qty;
+    let keys = Object.keys(myCart)
+    for (let i = 0; i<keys.length; i++) {
+      subt += myCart[keys[i]]["price"] * myCart[keys[i]].qty;
     }
     setSubTotal(subt)
   }
@@ -48,7 +48,7 @@ export default function App({ Component, pageProps }) {
   }
 
   const removeFromCart = (itemCode, qty, price, name, size, variant) => {
-    let newCart = cart;
+    let newCart = JSON.parse(JSON.stringify(cart));
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty - qty
     }
