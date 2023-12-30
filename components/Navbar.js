@@ -19,7 +19,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
   }
   const ref = useRef()
   return (
-    <div className="flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-xl">
+    <div className="flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky top-0 bg-white z-10">
       <div className="logo mx-5">
         <Link href={'/'}><Image width={200} height={40} src="/logo.png" alt="" /></Link>
       </div>
@@ -35,7 +35,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
         <AiOutlineShoppingCart className='text-xl md:test-2xl' />
       </div>
 
-      <div ref={ref} className="w-72 h-full z-10 sideCart absolute top-0 right-0 bg-green-100  px-8 py-10 transform transition-transform translate-x-full">
+      <div ref={ref} className={`w-72 h-[100vh] z-10 sideCart absolute top-0 right-0 bg-green-100  px-8 py-10 transform transition-transform ${Object.keys(cart).length !==0 ? `translate-x-0` : `translate-x-full`}`}>
         <h2 className="font-bold text-xl text-center">Shopping Cart</h2>
         <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl text-green-500"><AiFillCloseCircle /></span>
         <ol className='list-decimal font-semibold'>
@@ -51,9 +51,10 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
 
 
         </ol>
+        <div className="font-bold my-2">Subtotal: {subTotal}</div>
         <div className="flex">
 
-          <button className='flex mr-2 text-white bg-green-500 border-0 py-2 px-2 focus:outline-none hover:bg-green-600 rounded text-sm'> <BsFillBagCheckFill className='m-1' /> Checkout</button>
+          <Link href={'/checkout'}><button className='flex mr-2 text-white bg-green-500 border-0 py-2 px-2 focus:outline-none hover:bg-green-600 rounded text-sm'> <BsFillBagCheckFill className='m-1' /> Checkout</button></Link>
           <button onClick={clearCart} className='flex mr-2 text-white bg-green-500 border-0 py-2 px-2 focus:outline-none hover:bg-green-600 rounded text-sm'>  Clear Cart</button>
         </div>
       </div>
