@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import mongoose from "mongoose";
 import Product from "@/models/Product";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Post = ({ buyNow, addToCart, product, variants }) => {
     const router = useRouter()
@@ -14,9 +16,29 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
         let pinJson = await pins.json()
         if (pinJson.includes(parseInt(pin))) {
             setService(true)
+            toast.success('Your Pincode is serviceable!', {
+                position: "bottom-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
         else {
             setService(false)
+            toast.error('Sorry, Pincode not serviceable!', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     }
 
@@ -34,6 +56,18 @@ const Post = ({ buyNow, addToCart, product, variants }) => {
 
     return <>
         <section className="text-gray-600 body-font overflow-hidden">
+            <ToastContainer
+                position="bottom-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <div className="container px-5 py-16 mx-auto">
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
                     <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto px-24 object-cover object-top rounded" src={product.img} />
@@ -140,7 +174,7 @@ export async function getServerSideProps(context) {
         await mongoose.connect(process.env.MONGO_URI)
     }
     let product = await Product.findOne({ slug: context.query.slug })
-    let variants = await Product.find({ title: product.title })
+    let variants = await Product.find({ title: product.title, category: product.category })
     let colorSizeSlug = {}
     for (let item of variants) {
         if (Object.keys(colorSizeSlug).includes(item.color)) {
