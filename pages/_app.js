@@ -2,14 +2,21 @@ import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import '@/styles/globals.css'
 import { useRouter } from 'next/router'
+import LoadingBar from 'react-top-loading-bar'
 import { useEffect, useState } from 'react'
 
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({})
   const [subTotal, setSubTotal] = useState(0)
+  const [user, setUser] = useState({ value: null })
+  const [key, setKey] = useState(0)
+  const [progress, setProgress] = useState(0)
   const router = useRouter();
 
   useEffect(() => {
+    router.events.on('routeChangeComplete', ()=> {
+      setProgress(100)
+    })
     // console.log("Hey, I am a useEffect from _app.js")
     try {
       if (localStorage.getItem("cart")) {
@@ -20,7 +27,18 @@ export default function App({ Component, pageProps }) {
       console.error(error);
       localStorage.clear()
     }
-  }, [])
+    const token = localStorage.getItem('token')
+    if (token) {
+      setUser({ value: token })
+      setKey(Math.random())
+    }
+  }, [router.query])
+
+  const logout = () => {
+    localStorage.removeItem("token")
+    setUser({ value: null })
+    setKey(Math.random())
+  }
 
 
   const saveCart = (myCart) => {
@@ -69,7 +87,13 @@ export default function App({ Component, pageProps }) {
     saveCart(newCart)
   }
   return <>
-    <Navbar key={subTotal} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
+    <LoadingBar
+      color='#f11946'
+      progress={progress}
+      waitingTime={800}
+      onLoaderFinished={() => setProgress(0)}
+    />
+    <Navbar Logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
     <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
     <Footer />
   </>
