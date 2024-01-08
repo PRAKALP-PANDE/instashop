@@ -14,7 +14,10 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
 
   useEffect(() => {
-    router.events.on('routeChangeComplete', ()=> {
+    router.events.on('routeChangeStart', () => {
+      setProgress(40)
+    })
+    router.events.on('routeChangeComplete', () => {
       setProgress(100)
     })
     // console.log("Hey, I am a useEffect from _app.js")
@@ -38,6 +41,7 @@ export default function App({ Component, pageProps }) {
     localStorage.removeItem("token")
     setUser({ value: null })
     setKey(Math.random())
+    router.push('/')
   }
 
 
@@ -88,9 +92,9 @@ export default function App({ Component, pageProps }) {
   }
   return <>
     <LoadingBar
-      color='#f11946'
+      color='#16A34A'
       progress={progress}
-      waitingTime={800}
+      waitingTime={400}
       onLoaderFinished={() => setProgress(0)}
     />
     <Navbar Logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
