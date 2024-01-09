@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
 
       <div>
-        <img src="/home.jpg" alt="Home image" />
+        <img src="https://images.samsung.com/in/smartphones/galaxy-s23-ultra/buy/DM3-web-1.jpg" alt="Home image" />
       </div>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">

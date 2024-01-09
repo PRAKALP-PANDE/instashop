@@ -35,7 +35,7 @@ const Navbar = ({ Logout, user, cart, addToCart, removeFromCart, clearCart, subT
         </ul>
       </div>
       <div className="cursor-pointer items-center cart absolute right-0 top-4 mx-5 flex">
-        <a onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }}>
+        <span onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }}>
           {dropdown && <div onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} className="absolute right-8 bg-white shadow-lg border top-5 py-4 rounded-md px-5 w-32">
             <ul>
               <Link href={'/myaccount'} className='cursor-pointer'><li className='py-1 hover:text-green-700 text-sm font-bold'>My Account</li></Link>
@@ -45,7 +45,7 @@ const Navbar = ({ Logout, user, cart, addToCart, removeFromCart, clearCart, subT
           </div>}
 
           {user.value && <MdAccountCircle className='text-xl md:test-2xl mx-2' />}
-        </a>
+        </span>
         {!user.value && <Link href={'/login'}>
           <button className='bg-green-600 px-2 py-1 rounded-md text-sm text-white mx-2'>Login</button>
         </Link>}
