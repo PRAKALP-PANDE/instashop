@@ -2,10 +2,54 @@ import Link from 'next/link';
 import React from 'react'
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import { BsFillBagCheckFill } from "react-icons/bs";
+import Head from 'next/head';
+import Script from 'next/script';
 
 const Checkout = ({ cart, subTotal, addToCart, removeFromCart }) => {
+  const initiatePayment = async () => {
+    let oid = Math.floor(Math.random() * Date.now());
+    //Get a transaction token
+    const data = { cart, subTotal, oid, email: "email" };
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    let txnRes = await a.json()
+    console.log(txnToken);
+    let txnToken = txnRes.txnToken
+
+    var config = {
+      "root": "",
+      "flow": "DEFAULT",
+      "data": {
+        "orderId": oid, /* update order id*/
+        "token": txnToken, /* update token value */
+        "tokenType": "TXN_TOKEN",
+        "amount": subTotal /* update amount */
+      },
+      "handler": {
+        "notifyMerchant": function (eventName, data) {
+          console.log('notifyMerchant handler function called');
+          console.log("eventName => ", eventName);
+          console.log("data => ", data);
+        }
+      }
+    };
+    window.PaymentMethodChangeEvent.Checkout.init(config).then(function onSuccess() {
+      window.PaymentMethodChangeEvent.CheckoutJS.invoke();
+    }).catch(function onError(error) {
+      console.log("error => ", error);
+    });
+  }
   return (
     <div className='container py-2 sm:m-auto'>
+      <Head>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+      </Head>
+      <Script type="application/javascript" crossOrigin="anonymous" src={'$(process.env.NEXT_PUBLIC_PAYTM_HOST)/merchantpgui/checkoutjs/merchants/$(process.env.NEXT_PUBLIC_PAYTM_MID).js'} />
       <h1 className='font-bold text-3xl my-8 text-center'>Checkout</h1>
       <h2 className='font-semibold text-xl'>1. Delivery Details</h2>
       <div className="mx-auto flex my-2">
@@ -74,7 +118,7 @@ const Checkout = ({ cart, subTotal, addToCart, removeFromCart }) => {
         <span className="font-bold">Subtotal: {subTotal}</span>
       </div>
       <div className="mx-4">
-        <Link href={'/checkout'}><button className='flex mr-2 text-white bg-green-500 border-0 py-2 px-2 focus:outline-none hover:bg-green-600 rounded text-sm'> <BsFillBagCheckFill className='m-1' /> Pay ₹{subTotal}</button></Link>
+        <Link href={'/checkout'}><button onClick={initiatePayment} className='flex mr-2 text-white bg-green-500 border-0 py-2 px-2 focus:outline-none hover:bg-green-600 rounded text-sm'> <BsFillBagCheckFill className='m-1' /> Pay ₹{subTotal}</button></Link>
       </div>
 
     </div>
