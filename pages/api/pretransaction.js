@@ -5,6 +5,13 @@ import connectDb from "../../middleware/mongoose"
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
+
+        // Check if the cart is tampered with --- [Pending]
+
+        // Check if the cart items are out of stock -- [Pending]
+
+        // Check if the details are valid -- [Pending]
+
         //Initiate an order corresponding to this order id
         let order = new Order({
             email: req.body.email,
@@ -15,6 +22,7 @@ const handler = async (req, res) => {
         })
         await order.save()
 
+        // Insert an entry in the Orders table with status as pending
         var paytmParams = {};
 
         paytmParams.body = {
