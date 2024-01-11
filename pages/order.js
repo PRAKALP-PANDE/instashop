@@ -11,8 +11,10 @@ const MyOrder = ({ order }) => {
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">PRAKALP PANDE</h2>
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">Order Id: #{order.orderId}</h1>
-            <p className="leading-relaxed mb-4">Your order has been successfully placed. Your Payment Status is {order.status}</p>
+            <h1 className="text-gray-900 text-xl md:text-3xl title-font font-medium mb-4">Order Id: #{order.orderId}</h1>
+            <p className="leading-relaxed mb-4">Yayy! Your order has been successfully placed.
+              <p>Your Payment Status is <span className='font-semibold text-slate-700'>{order.status}</span> </p>
+            </p>
             <div className="flex mb-4">
               <a className="flex-grow text-center py-2 text-lg px-1">Item Description</a>
               <a className="flex-grow text-center border-gray-300 py-2 text-lg px-1">Quantity</a>
@@ -29,14 +31,14 @@ const MyOrder = ({ order }) => {
             })}
 
 
-            <div className="flex flex-col">
+            <div className="flex flex-col my-8">
               <span className="title-font font-medium text-2xl text-gray-900">SubTotal: ₹{order.amount}</span>
               <div className="my-6">
                 <button className="flex mx-0 text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">Track Order</button>
               </div>
             </div>
           </div>
-          <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400" />
+          <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="/shopping.jpg" />
         </div>
       </div>
     </section>
