@@ -4,6 +4,8 @@ import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import { BsFillBagCheckFill } from "react-icons/bs";
 import Head from 'next/head';
 import Script from 'next/script';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Checkout = ({ cart, subTotal, addToCart, removeFromCart }) => {
   const [name, setName] = useState('')
@@ -67,33 +69,61 @@ const Checkout = ({ cart, subTotal, addToCart, removeFromCart }) => {
       body: JSON.stringify(data),
     })
     let txnRes = await a.json()
-    let txnToken = txnRes.txnToken
+    if (txnRes.onSuccess) {
+      let txnToken = txnRes.txnToken
 
-    var config = {
-      "root": "",
-      "flow": "DEFAULT",
-      "data": {
-        "orderId": oid, /* update order id*/
-        "token": txnToken, /* update token value */
-        "tokenType": "TXN_TOKEN",
-        "amount": subTotal /* update amount */
-      },
-      "handler": {
-        "notifyMerchant": function (eventName, data) {
-          console.log('notifyMerchant handler function called');
-          console.log("eventName => ", eventName);
-          console.log("data => ", data);
+      var config = {
+        "root": "",
+        "flow": "DEFAULT",
+        "data": {
+          "orderId": oid, /* update order id*/
+          "token": txnToken, /* update token value */
+          "tokenType": "TXN_TOKEN",
+          "amount": subTotal /* update amount */
+        },
+        "handler": {
+          "notifyMerchant": function (eventName, data) {
+            console.log('notifyMerchant handler function called');
+            console.log("eventName => ", eventName);
+            console.log("data => ", data);
+          }
         }
-      }
-    };
-    window.PaymentMethodChangeEvent.Checkout.init(config).then(function onSuccess() {
-      window.PaymentMethodChangeEvent.CheckoutJS.invoke();
-    }).catch(function onError(error) {
-      console.log("error => ", error);
-    });
+      };
+      window.PaymentMethodChangeEvent.Checkout.init(config).then(function onSuccess() {
+        window.PaymentMethodChangeEvent.CheckoutJS.invoke();
+      }).catch(function onError(error) {
+        console.log("error => ", error);
+      });
+    }
+    else {
+      console.log(txnRes.error);
+      toast.error(txnRes.error, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   }
   return (
     <div className='container py-2 sm:m-auto'>
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
       <Head>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
       </Head>
