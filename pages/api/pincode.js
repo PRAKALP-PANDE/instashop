@@ -1,6 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 export default function handler(req, res) {
-    res.status(200).json([445304, 234400, 721302, 110003, 560017])
+  let pincodes = {
+    "445304": ["Wani", "Maharashtra"],
+    "721302": ["Kharagpur", "West Bengal"],
+    "110003": ["Delhi", "Delhi"],
+    "560017": ["Bangalore", "Karnataka"],
   }
-  
+  res.status(200).json(pincodes)
+}
