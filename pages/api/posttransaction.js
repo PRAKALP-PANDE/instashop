@@ -21,7 +21,7 @@ const handler = async (req, res) => {
   }
   // Initiate Shipping
   // Redirect user to the order confirmation page
-  res.redirect('/order?id=' + order._id, 200)
+  res.redirect('/order?clearCart=1&id=' + order._id, 200)
   // res.status(200).json({ body: req.body })
 }
 
