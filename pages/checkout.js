@@ -7,7 +7,7 @@ import Script from 'next/script';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Checkout = ({ cart, subTotal, addToCart, removeFromCart }) => {
+const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -97,6 +97,7 @@ const Checkout = ({ cart, subTotal, addToCart, removeFromCart }) => {
     }
     else {
       console.log(txnRes.error);
+      clearCart()
       toast.error(txnRes.error, {
         position: "top-left",
         autoClose: 5000,
