@@ -67,6 +67,10 @@ export async function getServerSideProps(context) {
         tshirts[item.title].color = [item.color]
         tshirts[item.title].size = [item.size]
       }
+      else {
+        tshirts[item.title].color = []
+        tshirts[item.title].size = []
+      }
     }
   }
 
