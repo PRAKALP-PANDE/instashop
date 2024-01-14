@@ -7,6 +7,7 @@ const OrderSchema = new mongoose.Schema({
     products: { type: Object, required: true },
     address: { type: String, required: true },
     amount: { type: Number, required: true },
+    phone: { type: String, default: '' },
     status: { type: String, default: 'Initiated', required: true },
     deliveryStatus: { type: String, default: 'unhipped', required: true },
 }, { timestamps: true });

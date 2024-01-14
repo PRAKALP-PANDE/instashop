@@ -33,18 +33,19 @@ const handler = async (req, res) => {
 
 
         // Check if the details are valid -- [Pending]
-        if (req.body.phone !== 10 || !Number.isInteger(req.body.phone)) {
-            res.status(200).json({ success: false, "error": "Please enter your 10 digit phone number" })
-            return
-        }
-        if (req.body.pincode !== 6 || !Number.isInteger(req.body.pincode)) {
-            res.status(200).json({ success: false, "error": "Please enter your 6 digit Pincode" })
-            return
-        }
+        // if (req.body.phone !== 10 || !Number.isInteger(req.body.phone)) {
+        //     res.status(200).json({ success: false, "error": "Please enter your 10 digit phone number" })
+        //     return
+        // }
+        // if (req.body.pincode !== 6 || !Number.isInteger(req.body.pincode)) {
+        //     res.status(200).json({ success: false, "error": "Please enter your 6 digit Pincode" })
+        //     return
+        // }
 
         //Initiate an order corresponding to this order id
         let order = new Order({
             email: req.body.email,
+            phone: req.body.phone,
             orderId: req.body.oid,
             address: req.body.address,
             amount: req.body.subTotal,
