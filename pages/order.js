@@ -11,7 +11,7 @@ const MyOrder = ({ order, clearCart }) => {
       clearCart()
     }
   }, [])
-  
+
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
@@ -19,8 +19,8 @@ const MyOrder = ({ order, clearCart }) => {
           <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">PRAKALP PANDE</h2>
             <h1 className="text-gray-900 text-xl md:text-3xl title-font font-medium mb-4">Order Id: #{order.orderId}</h1>
-            <p className="leading-relaxed mb-4">Yayy! Your order has been successfully placed.
-              <p>Your Payment Status is <span className='font-semibold text-slate-700'>{order.status}</span> </p>
+            <p className="leading-relaxed mb-4">Yayy! Your order has been successfully placed.</p>
+            <p>Your Payment Status is <span className='font-semibold text-slate-700'>{order.status}</span>
             </p>
             <div className="flex mb-4">
               <a className="flex-grow text-center py-2 text-lg px-1">Item Description</a>

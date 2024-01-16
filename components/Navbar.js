@@ -14,7 +14,7 @@ const Navbar = ({ Logout, user, cart, addToCart, removeFromCart, clearCart, subT
 
   useEffect(() => {
     Object.keys(cart).length !== 0 && setSidebar(true)
-    let exempted = ['/checkout', '/order', '/orders', '/']
+    let exempted = ['/checkout', '/order', '/orders', '/myaccount']
     if (exempted.includes(router.pathname)) {
       setSidebar(false)
     }
@@ -36,8 +36,8 @@ const Navbar = ({ Logout, user, cart, addToCart, removeFromCart, clearCart, subT
   }
   return (
     <>
-      <span>
-        {dropdown && <div onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} className="absolute right-14 bg-white shadow-lg border top-9 py-4 rounded-md px-5 w-32 z-30">
+      {!sidebar && <span onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} className='absolute right-9 top-4 z-30 cursor-pointer'>
+        {dropdown && <div className="absolute right-5 bg-white shadow-lg border top-5 py-4 rounded-md px-5 w-32 z-30">
           <ul>
             <Link href={'/myaccount'} className='cursor-pointer'><li className='py-1 hover:text-green-700 text-sm font-bold'>My Account</li></Link>
             <Link href={'/orders'} className='cursor-pointer'><li className='py-1 hover:text-green-700 text-sm font-bold'>Orders</li></Link>
@@ -45,7 +45,11 @@ const Navbar = ({ Logout, user, cart, addToCart, removeFromCart, clearCart, subT
           </ul>
         </div>}
 
-      </span>
+        <span onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }}>
+          {user.value && <MdAccountCircle className='text-xl md:test-2xl mx-2' />}
+        </span>
+
+      </span>}
       <div className={`flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky top-0 bg-white z-10 ${!sidebar && 'overflow-hidden'} `}>
         <div className="logo mr-auto md:mx-5">
           <Link href={'/'}><Image width={200} height={40} src="/logo.png" alt="" /></Link>
@@ -64,9 +68,6 @@ const Navbar = ({ Logout, user, cart, addToCart, removeFromCart, clearCart, subT
           {!user.value && <Link href={'/login'}>
             <button className='bg-green-600 px-2 py-1 rounded-md text-sm text-white mx-2'>Login</button>
           </Link>}
-          <span onMouseOver={() => { setDropdown(true) }} >
-            {user.value && <MdAccountCircle className='text-xl md:test-2xl mx-2' />}
-          </span>
           <AiOutlineShoppingCart onClick={toggleCart} className='text-xl md:test-2xl' />
         </div>
 

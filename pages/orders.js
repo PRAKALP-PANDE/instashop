@@ -17,7 +17,7 @@ const Orders = () => {
       })
       let res = await a.json()
       setOrders(res.orders);
-      console.log(res);
+      // console.log(res);
     }
     if (!localStorage.getItem('myuser')) {
       router.push('/')
@@ -41,6 +41,7 @@ const Orders = () => {
                     <tr>
                       <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left"># Order Id</th>
                       <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Email</th>
+                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Phone</th>
                       <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Amount</th>
                       <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">Details</th>
                     </tr>
@@ -51,6 +52,7 @@ const Orders = () => {
                       return <tr key={item._id} className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.orderId}</td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{item.email}</td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{item.phone}</td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{item.amount}</td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                           <Link className='cursor-pointer' href={'/order?id=' + item._id}>Details</Link>
