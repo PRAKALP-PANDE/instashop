@@ -36,11 +36,11 @@ const Navbar = ({ Logout, user, cart, addToCart, removeFromCart, clearCart, subT
   }
   return (
     <>
-      {!sidebar && <span onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} className='absolute right-9 top-4 z-30 cursor-pointer'>
+      {!sidebar && <span onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} className='fixed right-9 top-4 z-30 cursor-pointer'>
         {dropdown && <div className="absolute right-5 bg-white shadow-lg border top-5 py-4 rounded-md px-5 w-32 z-30">
           <ul>
             <Link href={'/myaccount'} className='cursor-pointer'><li className='py-1 hover:text-green-700 text-sm font-bold'>My Account</li></Link>
-            <Link href={'/orders'} className='cursor-pointer'><li className='py-1 hover:text-green-700 text-sm font-bold'>Orders</li></Link>
+            <Link href={'/orders'} className='cursor-pointer'><li className='py-1 hover:text-green-700 text-sm font-bold'>My Orders</li></Link>
             <li onClick={Logout} className='py-1 hover:text-green-700 text-sm font-bold'>Logout</li>
           </ul>
         </div>}

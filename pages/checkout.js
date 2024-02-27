@@ -16,15 +16,25 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
   const [state, setState] = useState('')
   const [city, setCity] = useState('')
   const [disabled, setDisabled] = useState(true)
-  const [user, setUser] = useState({value: null})
+  const [user, setUser] = useState({ value: null })
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('myuser'))
-    if (user.token) {
+    if (user && user.token) {
       setUser(user)
       setEmail(user.email)
     }
   }, [])
+
+  useEffect(() => {
+    if (name.length > 3 && email.length > 3 && phone.length > 3 && address.length > 3 && pincode.length > 3) {
+      setDisabled(false)
+    }
+    else {
+      setDisabled(true)
+    }
+  }, [name, email, phone, address, pincode])
+
 
   const handleChange = async (e) => {
     if (e.target.name == 'name') {
@@ -58,14 +68,6 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
         setCity('')
       }
     }
-    setTimeout(() => {
-      if (name.length > 3 && email.length > 3 && phone.length > 3 && address.length > 3 && pincode.length > 3) {
-        setDisabled(false)
-      }
-      else {
-        setDisabled(true)
-      }
-    }, 100);
   }
   const initiatePayment = async () => {
     let oid = Math.floor(Math.random() * Date.now());
@@ -107,7 +109,9 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
     }
     else {
       console.log(txnRes.error);
-      clearCart()
+      if (txnRes.cartClear) {
+        clearCart()
+      }
       toast.error(txnRes.error, {
         position: "top-left",
         autoClose: 5000,
@@ -151,7 +155,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
         <div className="px-2 w-1/2">
           <div className="mb-4">
             <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
-            {user && user.value ? <input value={user.email} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out cursor-not-allowed" readOnly /> : <input onChange={handleChange} value={email} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />}
+            {user && user.token ? <input value={user.email} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out cursor-not-allowed" readOnly /> : <input onChange={handleChange} value={email} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />}
 
           </div>
         </div>
