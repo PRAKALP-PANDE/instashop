@@ -52,9 +52,12 @@ const handler = async (req, res) => {
         //Initiate an order corresponding to this order id
         let order = new Order({
             email: req.body.email,
+            name: req.body.name,
             phone: req.body.phone,
             orderId: req.body.oid,
             address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
             amount: req.body.subTotal,
             products: req.body.cart,
         })

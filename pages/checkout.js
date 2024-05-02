@@ -19,10 +19,11 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
   const [user, setUser] = useState({ value: null })
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('myuser'))
-    if (user && user.token) {
-      setUser(user)
-      setEmail(user.email)
+    const myuser = JSON.parse(localStorage.getItem('myuser'))
+    if (myuser && myuser.token) {
+      setUser(myuser)
+      setEmail(myuser.email)
+      fetchData(myuser.token);
     }
   }, [])
 
@@ -34,6 +35,36 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
       setDisabled(true)
     }
   }, [name, email, phone, address, pincode])
+
+  const fetchData = async (token) => {
+    let data = { token: token };
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    let res = await a.json()
+    setName(res.name);
+    setAddress(res.address);
+    setPhone(res.phone);
+    setPincode(res.pincode);
+    getPinCode(res.pincode);
+  }
+
+  const getPinCode = async (pin) => {
+    let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
+    let pinJson = await pins.json()
+    if (Object.keys(pinJson).includes(pin)) {
+      setCity(pinJson[pin][0])
+      setState(pinJson[pin][1])
+    }
+    else {
+      setState('')
+      setCity('')
+    }
+  }
 
 
   const handleChange = async (e) => {
@@ -52,16 +83,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
     else if (e.target.name == 'pincode') {
       setPincode(e.target.value)
       if (e.target.value.length == 6) {
-        let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
-        let pinJson = await pins.json()
-        if (Object.keys(pinJson).includes(e.target.value)) {
-          setCity(pinJson[e.target.value][0])
-          setState(pinJson[e.target.value][1])
-        }
-        else {
-          setState('')
-          setCity('')
-        }
+        getPinCode(e.target.value);
       }
       else {
         setState('')
@@ -69,6 +91,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
       }
     }
   }
+
   const initiatePayment = async () => {
     let oid = Math.floor(Math.random() * Date.now());
     //Get a transaction token
@@ -142,7 +165,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
       <Head>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
       </Head>
-      <Script type="application/javascript" crossOrigin="anonymous" src={'$(process.env.NEXT_PUBLIC_PAYTM_HOST)/merchantpgui/checkoutjs/merchants/$(process.env.NEXT_PUBLIC_PAYTM_MID).js'} />
+      <Script type="application/javascript" crossOrigin="anonymous" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`} />
       <h1 className='font-bold text-3xl my-8 text-center'>Checkout</h1>
       <h2 className='font-semibold text-xl'>1. Delivery Details</h2>
       <div className="mx-auto flex my-2">

@@ -6,9 +6,12 @@ const OrderSchema = new mongoose.Schema({
     paymentInfo: { type: String, default: '' },
     products: { type: Object, required: true },
     address: { type: String, required: true },
+    city: { type: String, required: true },
+    pincode: { type: String, required: true },
     transactionid: { type: String, default: "" },
     amount: { type: Number, required: true },
-    phone: { type: String, default: '' },
+    phone: { type: String, required: true },
+    name: { type: String, required: true },
     status: { type: String, default: 'Initiated', required: true },
     deliveryStatus: { type: String, default: 'unhipped', required: true },
 }, { timestamps: true });
