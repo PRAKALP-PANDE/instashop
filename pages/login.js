@@ -94,7 +94,7 @@ const Login = () => {
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
               <div className="mt-2">
-                <input value={email} onChange={handleChange} id="email" name="email" type="email" autoComplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" />
+                <input value={email} onChange={handleChange} id="email" name="email" type="email" autoComplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
 
@@ -102,22 +102,22 @@ const Login = () => {
               <div className="flex items-center justify-between">
                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
                 <div className="text-sm">
-                  <Link href={'/forgot'} className="cursor-pointer font-semibold text-green-600 hover:text-green-500">Forgot password?</Link>
+                  <Link href={'/forgot'} className="cursor-pointer font-semibold text-teal-600 hover:text-teal-500">Forgot password?</Link>
                 </div>
               </div>
               <div className="mt-2">
-                <input value={password} onChange={handleChange} id="password" name="password" type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" />
+                <input value={password} onChange={handleChange} id="password" name="password" type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
 
             <div>
-              <button type="submit" className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Sign in</button>
+              <button type="submit" className="flex w-full justify-center rounded-md bg-teal-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">Sign in</button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?
-            <Link href={'/signup'} className="font-semibold leading-6 text-green-600 hover:text-green-500">Sign-Up</Link>
+            <Link href={'/signup'} className="font-semibold leading-6 text-teal-600 hover:text-teal-500">Sign-Up</Link>
           </p>
         </div>
       </div>

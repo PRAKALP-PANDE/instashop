@@ -29,7 +29,7 @@ const Tshirt = ({ products }) => {
                     <div className="mt-1">
                       {products[item].color.includes('red') && <button className='border-2 border-gray-300 ml-1 bg-red-700 rounded-full w-6 h-6 focus:outline-none'></button>}
                       {products[item].color.includes('white') && <button className='border-2 border-gray-300 ml-1 bg-white-700 rounded-full w-6 h-6 focus:outline-none'></button>}
-                      {products[item].color.includes('green') && <button className='border-2 border-gray-300 ml-1 bg-green-700 rounded-full w-6 h-6 focus:outline-none'></button>}
+                      {products[item].color.includes('teal') && <button className='border-2 border-gray-300 ml-1 bg-teal-700 rounded-full w-6 h-6 focus:outline-none'></button>}
                       {products[item].color.includes('black') && <button className='border-2 border-gray-300 ml-1 bg-black-700 rounded-full w-6 h-6 focus:outline-none'></button>}
                       {products[item].color.includes('violet') && <button className='border-2 border-gray-300 ml-1 bg-violet-700 rounded-full w-6 h-6 focus:outline-none'></button>}
                       {products[item].color.includes('blue') && <button className='border-2 border-gray-300 ml-1 bg-blue-700 rounded-full w-6 h-6 focus:outline-none'></button>}

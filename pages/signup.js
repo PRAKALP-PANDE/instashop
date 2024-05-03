@@ -81,13 +81,13 @@ const Signup = () => {
             <div>
               <label for="name" className="block text-sm font-medium leading-6 text-gray-900">Your Name</label>
               <div className="mt-2">
-                <input value={name} onChange={handleChange} id="name" name="name" type="text" autocomplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" />
+                <input value={name} onChange={handleChange} id="name" name="name" type="text" autocomplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
             <div>
               <label for="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
               <div className="mt-2">
-                <input value={email} onChange={handleChange} id="email" name="email" type="email" autocomplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" />
+                <input value={email} onChange={handleChange} id="email" name="email" type="email" autocomplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
 
@@ -96,18 +96,18 @@ const Signup = () => {
                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">New Password</label>
               </div>
               <div className="mt-2">
-                <input value={password} onChange={handleChange} id="password" name="password" type="password" autocomplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" />
+                <input value={password} onChange={handleChange} id="password" name="password" type="password" autocomplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
 
             <div>
-              <button type="submit" className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Create an account</button>
+              <button type="submit" className="flex w-full justify-center rounded-md bg-teal-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">Create an account</button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Already a member?
-            <Link href={'/login'} className="font-semibold leading-6 text-green-600 hover:text-green-500">Login</Link>
+            <Link href={'/login'} className="font-semibold leading-6 text-teal-600 hover:text-teal-500">Login</Link>
           </p>
         </div>
       </div>

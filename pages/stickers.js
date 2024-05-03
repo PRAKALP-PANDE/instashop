@@ -6,9 +6,9 @@ import mongoose from 'mongoose'
 const Stickers = ({ products }) => {
   return (
     <div>
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font min-h-screen">
         <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap -m-4 justify-center">
+          <div className="flex flex-wrap -m-4 justify-center mx-5">
             {Object.keys(products).length === 0 && <p>Sorry all the Hoodies are currently out of stock. New stock comming soon!</p>}
             {Object.keys(products).map((item) => {
               return <Link passHref={true} key={products[item]._id} href={`/product/${products[item].slug}`}> <div className="lg:w-1/5 md:w-1/2 p-4 w-full cursor-pointer shadow-lg m-5">
@@ -29,7 +29,7 @@ const Stickers = ({ products }) => {
                   <div className="mt-1">
                     {products[item].color.includes('red') && <button className='border-2 border-gray-300 ml-1 bg-red-700 rounded-full w-6 h-6 focus:outline-none'></button>}
                     {products[item].color.includes('white') && <button className='border-2 border-gray-300 ml-1 bg-white-700 rounded-full w-6 h-6 focus:outline-none'></button>}
-                    {products[item].color.includes('green') && <button className='border-2 border-gray-300 ml-1 bg-green-700 rounded-full w-6 h-6 focus:outline-none'></button>}
+                    {products[item].color.includes('teal') && <button className='border-2 border-gray-300 ml-1 bg-teal-700 rounded-full w-6 h-6 focus:outline-none'></button>}
                     {products[item].color.includes('black') && <button className='border-2 border-gray-300 ml-1 bg-black-700 rounded-full w-6 h-6 focus:outline-none'></button>}
                     {products[item].color.includes('violet') && <button className='border-2 border-gray-300 ml-1 bg-violet-700 rounded-full w-6 h-6 focus:outline-none'></button>}
                     {products[item].color.includes('blue') && <button className='border-2 border-gray-300 ml-1 bg-blue-700 rounded-full w-6 h-6 focus:outline-none'></button>}
